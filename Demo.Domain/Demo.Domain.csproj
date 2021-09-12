@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>Demo.Domain</RootNamespace>
+        <AssemblyName>Demo.Domain</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="Dtos\**" />
+      <EmbeddedResource Remove="Dtos\**" />
+      <None Remove="Dtos\**" />
+    </ItemGroup>
+
+</Project>
