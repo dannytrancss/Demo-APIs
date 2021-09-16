@@ -62,5 +62,11 @@ namespace Demo.Infrastructture.Repositories
 
             return null;
         }
+
+        public async Task<long> GetToalRecordsAsync()
+        {
+            return await _dbCollection.EstimatedDocumentCountAsync();
+
+        }
     }
 }
