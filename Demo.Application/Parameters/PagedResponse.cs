@@ -10,9 +10,11 @@ namespace Demo.Application.Parameters
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
+        public long TotalRecords { get; set; }
 
-        public PagedResponse(T data, int pageNumber, int pageSize)
+        public PagedResponse(T data, int pageNumber, int pageSize, long totalRecords)
         {
+            TotalRecords = totalRecords;
             PageNumber = pageNumber;
             PageSize = pageSize;
             Data = data;
@@ -20,8 +22,9 @@ namespace Demo.Application.Parameters
             Succeeded = true;
             Errors = null;
         }
-        public PagedResponse(T data, int pageNumber, int pageSize, bool isSucceed = true, string message = null)
+        public PagedResponse(T data, int pageNumber, int pageSize, long totalRecords, bool isSucceed = true, string message = null)
         {
+            TotalRecords = totalRecords;
             PageNumber = pageNumber;
             PageSize = pageSize;
             Data = data;
