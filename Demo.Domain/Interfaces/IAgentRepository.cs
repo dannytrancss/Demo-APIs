@@ -12,5 +12,6 @@ namespace Demo.Domain.Interfaces
         Task AddAgentAsync(AgentEntity agent);
         Task UpdateAgentAsync(AgentEntity agent);
         Task<Guid?> DeleteAgentAsync(Guid id);
+        Task<long> GetToalRecordsAsync();
     }
 }
