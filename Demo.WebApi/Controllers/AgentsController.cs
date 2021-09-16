@@ -44,18 +44,14 @@ namespace Demo.WebApi.Controllers
             return Ok(await _mediator.Send(command));
         }
 
-        [HttpPut("{id}", Name = "UpdateAgent")]
-        public async Task<ActionResult<AgentViewModel>> UpdateAgentAsync(Guid id, [FromBody] UpdateAgentCommand command)
+        [HttpPut(Name = "UpdateAgent")]
+        public async Task<ActionResult<AgentViewModel>> UpdateAgentAsync([FromBody] UpdateAgentCommand command)
         {
             if (!ModelState.IsValid)
             { // re-render the view when validation failed.
                 return BadRequest(ModelState);
             }
-
-            if (id != command.Id)
-            {
-                return BadRequest();
-            }
+            
             return Ok(await _mediator.Send(command));
         }
 
