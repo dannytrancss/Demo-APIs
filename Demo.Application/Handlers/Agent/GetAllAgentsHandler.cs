@@ -25,16 +25,18 @@ namespace Demo.Application.Handlers.Agent
 
         public async Task<PagedResponse<IEnumerable<AgentViewModel>>> Handle(GetAllAgentsQuery request, CancellationToken cancellationToken)
         {
+            var totalRecords = 0L;
             try
             {
                 var validFilter = _mapper.Map<GetAllAgentsParameter>(request);
                 var agentList = await _repository.GetAllAgentsAsync(request.PageNumber, request.PageSize);
                 var agentViewModel = _mapper.Map<IEnumerable<AgentViewModel>>(agentList);
-                return new PagedResponse<IEnumerable<AgentViewModel>>(agentViewModel, validFilter.PageNumber, validFilter.PageSize);
+                totalRecords = await _repository.GetToalRecordsAsync();
+                return new PagedResponse<IEnumerable<AgentViewModel>>(agentViewModel, validFilter.PageNumber, validFilter.PageSize, totalRecords);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return new PagedResponse<IEnumerable<AgentViewModel>>(null, request.PageNumber, request.PageSize, false, ex.Message);
+                return new PagedResponse<IEnumerable<AgentViewModel>>(null, request.PageNumber, request.PageSize, totalRecords, false, ex.Message);
             }
         }
     }
