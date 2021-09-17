@@ -20,19 +20,31 @@ namespace Demo.WebApi.Controllers
         {
             _mediator = mediator;
         }
-
+        /// <summary>
+        /// Get agent list with paging
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         [HttpGet(Name = "GetAllAgents")]
         public async Task<ActionResult<IEnumerable<AgentViewModel>>> GetAllAgentsAsync([FromQuery] GetAllAgentsParameter filter)
         {
             return Ok(await _mediator.Send(new GetAllAgentsQuery() { PageNumber = filter.PageNumber, PageSize = filter.PageSize }));
         }
-
+        /// <summary>
+        /// Get an agent by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}", Name = "GetAgentById")]
         public async Task<ActionResult<AgentViewModel>> GetAgentByIdAsync(Guid id)
         {
             return Ok(await _mediator.Send(new GetAgentQuery() { Id = id }));
         }
-
+        /// <summary>
+        /// Add an agent
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPost(Name = "AddAgent")]
         public async Task<ActionResult<AgentViewModel>> AddAgentAsync([FromBody] AddAgentCommand command)
         {
@@ -43,7 +55,11 @@ namespace Demo.WebApi.Controllers
 
             return Ok(await _mediator.Send(command));
         }
-
+        /// <summary>
+        /// update an agent
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPut(Name = "UpdateAgent")]
         public async Task<ActionResult<AgentViewModel>> UpdateAgentAsync([FromBody] UpdateAgentCommand command)
         {
@@ -54,7 +70,11 @@ namespace Demo.WebApi.Controllers
             
             return Ok(await _mediator.Send(command));
         }
-
+        /// <summary>
+        /// Delete an agent
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}", Name = "DeleteAgent")]
         public async Task<ActionResult<Guid?>> DeleteAgent(Guid id)
         {
