@@ -12,25 +12,41 @@ namespace Demo.Infrastructture.Repositories
         private const string CollectionName = "agents";
         private readonly IMongoCollection<AgentEntity> _dbCollection;
         private readonly FilterDefinitionBuilder<AgentEntity> _filterBuilder = Builders<AgentEntity>.Filter;
-
+        /// <summary>
+        /// Create an AgentRepository
+        /// </summary>
+        /// <param name="database"></param>
         public AgentRepository(IMongoDatabase database)
         {
             _dbCollection = database.GetCollection<AgentEntity>(CollectionName);
         }
-
+        /// <summary>
+        /// Get agent by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<AgentEntity> GetAgentByIdAsync(Guid id)
         {
             var filter = _filterBuilder.Eq(agent => agent.Id, id);
             return await _dbCollection.Find(filter).FirstOrDefaultAsync();
         }
-
+        /// <summary>
+        /// Get all agents with paging
+        /// </summary>
+        /// <param name="pageNumber"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         public async Task<IReadOnlyCollection<AgentEntity>> GetAllAgentsAsync(int pageNumber, int pageSize)
         {
             return await _dbCollection.Find(_filterBuilder.Empty)
                     .Skip((pageNumber - 1) * pageSize)
                     .Limit(pageSize).ToListAsync();
         }
-
+        /// <summary>
+        /// Add an agent
+        /// </summary>
+        /// <param name="agent"></param>
+        /// <returns></returns>
         public async Task AddAgentAsync(AgentEntity agent)
         {
             if (agent == null)
@@ -40,7 +56,11 @@ namespace Demo.Infrastructture.Repositories
 
             await _dbCollection.InsertOneAsync(agent);
         }
-
+        /// <summary>
+        /// Update an agent info
+        /// </summary>
+        /// <param name="agent"></param>
+        /// <returns></returns>
         public async Task UpdateAgentAsync(AgentEntity agent)
         {
             if (agent == null)
@@ -52,7 +72,11 @@ namespace Demo.Infrastructture.Repositories
 
             await _dbCollection.ReplaceOneAsync(filter, agent);
         }
-
+        /// <summary>
+        /// Delete an agent by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<Guid?> DeleteAgentAsync(Guid id)
         {
             var filter = _filterBuilder.Eq(agent => agent.Id, id);
@@ -62,7 +86,10 @@ namespace Demo.Infrastructture.Repositories
 
             return null;
         }
-
+        /// <summary>
+        /// Count total of agents
+        /// </summary>
+        /// <returns></returns>
         public async Task<long> GetToalRecordsAsync()
         {
             return await _dbCollection.EstimatedDocumentCountAsync();
