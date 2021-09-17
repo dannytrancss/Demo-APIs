@@ -21,7 +21,12 @@ namespace Demo.Application.Handlers.Agent
             _repository = repository;
             _mapper = mapper;
         }
-
+        /// <summary>
+        /// To process for deleting an agent request by id.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<Response<AgentViewModel>> Handle(UpdateAgentCommand request, CancellationToken cancellationToken)
         {
             try
