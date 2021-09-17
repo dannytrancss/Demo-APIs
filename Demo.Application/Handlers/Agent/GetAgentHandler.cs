@@ -20,7 +20,12 @@ namespace Demo.Application.Handlers.Agent
             _repository = repository;
             _mapper = mapper;
         }
-
+        /// <summary>
+        /// To process for getting an agent request by id.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<Response<AgentViewModel>> Handle(GetAgentQuery request, CancellationToken cancellationToken)
         {
             try
