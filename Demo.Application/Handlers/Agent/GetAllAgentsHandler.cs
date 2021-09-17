@@ -22,7 +22,12 @@ namespace Demo.Application.Handlers.Agent
             _repository = repository;
             _mapper = mapper;
         }
-
+        /// <summary>
+        /// To process for getting all agents request with paging.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<PagedResponse<IEnumerable<AgentViewModel>>> Handle(GetAllAgentsQuery request, CancellationToken cancellationToken)
         {
             var totalRecords = 0L;
