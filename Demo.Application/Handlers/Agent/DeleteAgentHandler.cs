@@ -17,7 +17,12 @@ namespace Demo.Application.Handlers.Agent
         {
             _repository = repository;
         }
-
+        /// <summary>
+        /// To process for deleting an agent request.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<Response<AgentViewModel>> Handle(DeleteAgentCommand request, CancellationToken cancellationToken)
         {
             try
