@@ -2,3 +2,12 @@
 .vs/DemoAgents/config/applicationhost.config
 .vs/DemoAgents/DesignTimeBuild/.dtbcache.v2
 .vs/DemoAgents/v16/.suo
+bin/
+obj/
+Demo.WebApi/Demo.WebApi.csproj.user
+Demo.WebApi/Properties/PublishProfiles/FolderProfile.pubxml
+*.user
+*.user
+Demo.WebApi/Demo.WebApi.csproj.user
+Demo.WebApi/Demo.WebApi.csproj.user
+*.user
